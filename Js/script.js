@@ -42,12 +42,16 @@ let printscore = document.querySelector("#score");
 
 clear.addEventListener("click", function() {
     let labelAnswers = document.querySelectorAll(".labelAnswer");
+    let inputAnswers = document.querySelectorAll(".inputAnswer");
+
     score = 0;
     printscore.innerHTML = "";
     for (let i = 0; i < labelAnswers.length; i++) {
         labelAnswers[i].classList.remove("green");
         labelAnswers[i].classList.remove("red");
+        inputAnswers[i].disabled = false;
     }
+    submitButton.disabled = false;
 })
 
 submitButton.addEventListener("click", function(event) {
@@ -86,9 +90,11 @@ submitButton.addEventListener("click", function(event) {
                 labelAnswers[i].classList.add("red");
             }
         }
+        inputAnswers[i].disabled = true;
     }
     printscore.innerHTML = `Her er dit resultat ${score} ${score == 1 ? "rigtig" : "rigtige"}`
         // printscore.innerHTML = "Her er dit resultat " + score + "rigtige";
+    submitButton.disabled = true;
 });
 
 function createQuestionGroup() {
